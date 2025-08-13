@@ -65,3 +65,7 @@ func (c *Configuration) DisableDeleteVersionAfter() {
 func (c *Configuration) ResetDeleteVersionAfter() {
 	c.DeleteVersionAfter = nil
 }
+
+func (c *Configuration) IsDestroyVersionAfterAutoDeleteEnabled() bool {
+	return c.GetDestroyVersionAfterAutoDeleteEnabled()
+}

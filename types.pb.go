@@ -28,9 +28,10 @@ type Configuration struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MaxVersions        uint32               `protobuf:"varint,1,opt,name=max_versions,json=maxVersions,proto3" json:"max_versions,omitempty"`
-	CasRequired        bool                 `protobuf:"varint,2,opt,name=cas_required,json=casRequired,proto3" json:"cas_required,omitempty"`
-	DeleteVersionAfter *durationpb.Duration `protobuf:"bytes,3,opt,name=delete_version_after,json=deleteVersionAfter,proto3" json:"delete_version_after,omitempty"`
+	MaxVersions                          uint32               `protobuf:"varint,1,opt,name=max_versions,json=maxVersions,proto3" json:"max_versions,omitempty"`
+	CasRequired                          bool                 `protobuf:"varint,2,opt,name=cas_required,json=casRequired,proto3" json:"cas_required,omitempty"`
+	DeleteVersionAfter                   *durationpb.Duration `protobuf:"bytes,3,opt,name=delete_version_after,json=deleteVersionAfter,proto3" json:"delete_version_after,omitempty"`
+	DestroyVersionAfterAutoDeleteEnabled bool                 `protobuf:"varint,4,opt,name=destroy_version_after_auto_delete_enabled,json=DestroyVersionAfterAutoDeleteEnabled,proto3" json:"destroy_version_after_auto_delete_enabled,omitempty"`
 }
 
 func (x *Configuration) Reset() {
@@ -84,6 +85,13 @@ func (x *Configuration) GetDeleteVersionAfter() *durationpb.Duration {
 		return x.DeleteVersionAfter
 	}
 	return nil
+}
+
+func (x *Configuration) GetDestroyVersionAfterAutoDeleteEnabled() bool {
+	if x != nil {
+		return x.DestroyVersionAfterAutoDeleteEnabled
+	}
+	return false
 }
 
 type VersionMetadata struct {
@@ -188,6 +196,8 @@ type KeyMetadata struct {
 	// CustomMetadata is a map of string key-value pairs used to store
 	// user-provided information about the secret.
 	CustomMetadata map[string]string `protobuf:"bytes,10,rep,name=custom_metadata,json=customMetadata,proto3" json:"custom_metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+
+	DestoryVersionAfterAutoDeleteEnabled bool `protobuf:"varint,11,opt,name=destroy_version_after_auto_delete_enabled,json=DestoryVersionAfterAutoDeleteEnabled,proto3" json:"destroy_version_after_auto_delete_enabled,omitempty"`
 }
 
 func (x *KeyMetadata) Reset() {

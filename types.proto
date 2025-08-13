@@ -15,6 +15,7 @@ message Configuration {
 	uint32 max_versions = 1;
 	bool cas_required = 2;
 	google.protobuf.Duration delete_version_after = 3;
+	bool destroy_version_after_auto_delete_enabled = 4;
 }
 
 message VersionMetadata {
@@ -69,6 +70,10 @@ message KeyMetadata {
     // CustomMetadata is a map of string key-value pairs used to store
     // user-provided information about the secret.
 	map<string, string> custom_metadata = 10;
+
+	// CasRequired specifies if the cas parameter is
+	// required for this key
+	bool destroy_version_after_auto_delete_enabled = 11;
 }
 
 
